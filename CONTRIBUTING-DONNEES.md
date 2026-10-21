@@ -5,7 +5,7 @@
 | Fichier | Contenu | Source | Rythme |
 |---|---|---|---|
 | `src/data/ssb.json` | 134+ émissions SSB depuis 2015 : coupons 1 à 10, moyennes, dates, taille, demandes, allotment (montants en S$ millions) | API statistique MAS `bondsandbills/m/listsavingbonds` + `savingbondsinterest` (sans clé, JSON) | annonce le 1er jour ouvré du mois, résultats l'avant-avant-dernier jour ouvré |
-| `src/data/tbills.json` | adjudications T-bills 6 mois (BS) et 1 an (BY) depuis 2015 | API MAS `listbondsandbills?filters=product_type:B` (le filtre `bill_bond_ind:bill` ramène aussi les MAS Bills) | 6 mois : toutes les deux semaines ; 1 an : chaque trimestre |
+| `src/data/tbills.json` | adjudications T-bills 1 an (BY) depuis 2015 et 6 mois (BS) depuis juin 2019 (reprise des T-bills SGS 6 mois) | API MAS `listbondsandbills?filters=product_type:B` (le filtre `bill_bond_ind:bill` ramène aussi les MAS Bills) | 6 mois : toutes les deux semaines ; 1 an : chaque trimestre |
 | `src/data/calendar.json` | prochaines SSB et prochaines adjudications annoncées | API MAS `savingbondsissuancecalendar`, `issuancecalendar?filters=issue_type:T` | au fil des annonces |
 | `src/data/sora.json` | 12 mois de SORA quotidien (overnight, 1M/3M/6M compounded) | formulaire MAS `statistics/dir/DomesticInterestRates.aspx` (POST, cases 13 à 17) ; l'API JSON SORA exige une clé APIMG | chaque jour ouvré, publié à 9 h le jour ouvré suivant |
 | `src/data/deposits.json` | taux moyens pondérés des dépôts SGD (FD 1/3/6/12 mois, épargne) et plus hauts taux cotés, trimestriels depuis 2021 T3 | MAS MSB table III.3A, `www.mas.gov.sg/api/v1/MAS/chart/table_iii_3a_…` (User-Agent Chrome complet obligatoire) | trimestriel ; l'ancienne série III.3 (mensuelle) est arrêtée depuis mai 2023 |

@@ -32,14 +32,14 @@ const has = (id: string) => ROUTES.some((r) => r.id === id);
 
   <section data-chrome class="my-8 grid gap-6 md:grid-cols-2" aria-label="Auction board">
     {x.board.map((c) => (
-      <div class="border-t-2 border-accent-500 pt-3">
+      <article class="border-t-2 border-accent-500 pt-3">
         <p class="text-xs font-semibold uppercase tracking-wide text-accent-700">{c.k}</p>
         <p class="mt-1 font-serif text-xl font-bold text-navy-900">{c.title}</p>
         <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
           {c.lines.map(([a, b]) => <><dt class="text-navy-600">{a}</dt><dd class="tabular-nums text-right text-navy-900">{b}</dd></>)}
         </dl>
         {has(c.id) && <a href={route(c.id, lang)} class="mt-2 inline-block text-sm font-medium text-accent-700 underline">{c.l}</a>}
-      </div>
+      </article>
     ))}
   </section>
 
@@ -55,9 +55,13 @@ const has = (id: string) => ROUTES.some((r) => r.id === id);
 
   <section class="mt-10">
     <h2 class="font-serif text-2xl font-bold text-navy-900">{x.datesTitle}</h2>
-    <ol class="mt-3 border-l border-navy-200 pl-5 text-navy-800">
-      {x.dates.map(([d, t]) => <li class="mb-3"><span class="tabular-nums block text-sm font-semibold text-navy-900">{d}</span><span class="text-sm">{t}</span></li>)}
-    </ol>
+    <figure class="not-prose mt-3 overflow-x-auto">
+      <table class="journal w-full text-sm">
+        <thead><tr><th scope="col" class="px-3 py-2 text-left">Date</th><th scope="col" class="px-3 py-2 text-left">What happens</th></tr></thead>
+        <tbody>{x.dates.map(([d, t]) => <tr><td class="tabular-nums whitespace-nowrap border-b border-navy-100 px-3 py-2 font-semibold text-navy-900">{d}</td><td class="border-b border-navy-100 px-3 py-2 text-navy-800">{t}</td></tr>)}</tbody>
+      </table>
+      <figcaption class="mt-2 text-xs text-navy-600">From the MAS issuance calendar, read every business day. Dates not yet announced by MAS are not shown.</figcaption>
+    </figure>
   </section>
 
   <section class="mt-10" data-chrome>

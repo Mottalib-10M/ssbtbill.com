@@ -5,7 +5,7 @@ const en = {
   faqTitle: 'What savers ask us', relatedCalculators: 'Work out next', sourcesTitle: 'Where the figures come from', writtenBy: 'Worked out by',
   asOf: 'Rates and rules of', lastUpdated: 'auction data last read on', footerValidated: 'Sources: MAS statistics API (Savings Bonds and SGS bills), MAS bond and bill pages, CPF Board interest and retirement pages, IRAS, SDIC',
   footerBrowser: 'Computed in your browser · no e-mail, no account · nothing to buy, no bank to call',
-  footerDisclaimer: 'Independent site published by Radif Partners, a company based in France. Not affiliated with the Monetary Authority of Singapore, the CPF Board, any bank or any broker. Calculations and general information only, not a recommendation to buy, hold or redeem anything.',
+  footerDisclaimer: 'Independent site published by Radif Partners, a company based in France. Not affiliated with the Monetary Authority of Singapore, the CPF Board, any bank or any broker. Calculations and general information only: not financial advice, and not a recommendation to buy, hold or redeem anything.',
   footerPopular: 'Most used',
   notFound: 'This page does not exist. The comparison on the home page shows what a sum earns in the latest Savings Bond, the latest T-bill, a fixed deposit and CPF, year by year.',
   readMore: 'Read the full answer',

@@ -8,8 +8,8 @@ import { KIT as K } from '../../lib/kit';
 import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
 const lang = 'en';
 const path = route('about', lang);
-const title = 'SG Safe Savings 2026: who builds these SSB and CPF calculators';
-const description = 'SG Safe Savings is published by Radif Partners: Savings Bond, T-bill, deposit and CPF calculators built on MAS and CPF Board data, with no e-mail and no bank behind.';
+const title = 'SSB and CPF Calculator Publisher 2026: About SG Safe Savings';
+const description = 'SG Safe Savings is published by Radif Partners: Savings Bond, T-bill, deposit and CPF calculators on MAS and CPF Board data, no e-mail asked, no bank behind.';
 const nIssues = K.ISSUES.length, nBills = K.bills('6M').length + K.bills('1Y').length;
 ---
 <PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'About', path }])]} breadcrumbs={[{ label: 'About' }]}>

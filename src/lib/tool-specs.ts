@@ -39,7 +39,7 @@ export function comparePlaces(amount: number, years: number, fdRate: number, age
   const cpf = Math.round(amount * (Math.pow(1 + cpfRate, y) - 1));
   return [
     { key: 'ssb', name: `Savings Bond, ${month(LATEST_ISSUE.issue)} issue`, rate: ssbInt / Math.max(1, amount) / y, interest: ssbInt, note: `${pc(LATEST_ISSUE.coupon[0])} in year 1, stepping up; coupons not reinvested; S$${SSB.fee} fee` },
-    { key: 'tbill', name: `6-month T-bill, renewed at ${pc(b.cutoff)}`, rate: roll.gain / Math.max(1, amount) / y, interest: roll.gain, note: `cut-off of ${day(b.auction)} kept for ${roll.rolls} rolls (illustration); no bank fee counted` },
+    { key: 'tbill', name: `6-month T-bill, renewed at ${pc(b.cutoff)}`, rate: roll.gain / Math.max(1, amount) / y, interest: roll.gain, note: `cut-off of ${day(b.auction)} kept for ${roll.rolls} rolls (illustration); reinvested in whole S$1,000 lots; no bank fee counted` },
     { key: 'fd', name: `Fixed deposit at ${pct(fdRate)}`, rate: fd.interest / Math.max(1, amount) / y, interest: fd.interest, note: 'the rate you enter, renewed at the same rate each year' },
     { key: 'cpf', name: age55 ? 'CPF Retirement Account' : 'CPF Special Account (top-up)', rate: cpf / Math.max(1, amount) / y, interest: cpf, note: `${pct(cpfRate)} a year compounded, before extra interest; money locked until payout age` },
   ];
@@ -217,7 +217,7 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
     inputs: [termIn((arg?.tm as '6M' | '1Y') ?? '6M'), { kind: 'select', id: 'yr', label: 'Year', def: String(arg?.yr ?? latestBill('6M').auction.slice(0, 4)), options: Array.from({ length: Number(latestBill('6M').auction.slice(0, 4)) - 2014 }, (_, k) => String(Number(latestBill('6M').auction.slice(0, 4)) - k)).map((y) => ({ value: y, label: y })) }],
     run: (v) => {
       const t = term(v), yr = n(v, 'yr'), list = yearBills(t, yr);
-      if (!list.length) return { label: `Cut-off yields in ${yr}`, value: 'n/a', sub: 'No auction of this bill in that year.', rows: [] };
+      if (!list.length) return { label: `Cut-off yields in ${yr}`, value: 'n/a', sub: `No auction of this bill in that year: the MAS data has 6-month SGS T-bill auctions from ${day(doneBills('6M')[0].auction)} and 1-year auctions from ${day(doneBills('1Y')[0].auction)} in the period covered.`, rows: [] };
       const ys = list.map((b) => b.cutoff), avg = ys.reduce((a, b) => a + b, 0) / ys.length;
       return {
         label: `Average cut-off, ${t === '6M' ? '6-month' : '1-year'} bills, ${yr}`, value: pc(avg),
@@ -254,7 +254,7 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
         label: `Interest at maturity, ${num(r.months)} months`, value: sgd2(r.interest),
         sub: `Simple interest on ${sgd(n(v, 'amt'))} at ${pct(n(v, 'rt') / 100)} a year, paid at maturity.`,
         rows: [['Interest', sgd2(r.interest), r.interest], ['Monthly equivalent', sgd2(r.interest / Math.max(1, r.months))], ['Covered by deposit insurance (per bank)', sgd(ins)]],
-        note: 'Banks count days; a 12-month deposit started on a given day can differ from this by a few cents. Breaking a deposit early usually forfeits some or all interest.',
+        note: 'Banks count days; a 12-month deposit started on a given day can differ from this by a few cents. Early withdrawal terms are set by each bank: check yours.',
       };
     },
   }),
@@ -284,7 +284,7 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
         label: 'Interest over a year', value: sgd2(r.interest),
         sub: `Effective rate on the whole balance: ${pct(r.effective)}.`,
         rows: r.parts.map(([amt, rate, i], k) => [`Tier ${k + 1}: ${sgd(amt)} at ${pct(rate)}`, sgd2(i), i]),
-        note: 'Bonus rates usually need conditions (salary credit, card spend). Enter the rate you actually qualify for.',
+        note: 'Enter the rate you actually qualify for, conditions included, as your bank states it.',
       };
     },
   }),
@@ -373,7 +373,7 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
   }),
   /* T-bill: a competitive bid against past cut-offs */
   tbid: (arg) => ({
-    inputs: [termIn((arg?.tm as '6M' | '1Y') ?? '6M'), { id: 'bid', label: 'Yield you would bid', def: Math.max(0.1, Math.round((latestBill('6M').cutoff - 0.05) * 100) / 100), unit: '%', max: 10, decimals: 2, help: 'A competitive bid: the lowest yield you accept' }],
+    inputs: [termIn((arg?.tm as '6M' | '1Y') ?? '6M'), { id: 'bid', label: 'Yield you would bid', def: Math.max(0.1, Math.round((latestBill((arg?.tm as '6M' | '1Y') ?? '6M').cutoff - 0.05) * 100) / 100), unit: '%', max: 10, decimals: 2, help: 'A competitive bid: the lowest yield you accept' }],
     run: (v) => {
       const t = term(v), bid = n(v, 'bid'), list = doneBills(t).slice(-12).reverse();
       const won = list.filter((b) => bid < b.cutoff + 1e-9);
@@ -394,10 +394,10 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
       const amt = Math.min(n(v, 'amt'), P.srs.capForeigner), mr = n(v, 'mr') / 100, y = n(v, 'yl') / 100, yrs = Math.round(n(v, 'yrs'));
       const relief = Math.round(amt * mr), end = Math.round(amt * Math.pow(1 + y, yrs));
       return {
-        label: 'Tax saved this year', value: sgd(relief),
+        label: 'Tax relief worth, at your rate', value: sgd(relief),
         sub: `${sgd(amt)} contributed at a ${pct(mr, 1)} marginal rate. Grown at ${pct(y)} a year for ${yrs} years: ${sgd(end)}, of which ${pct(P.srs.taxableShare, 0)} is taxable when withdrawn from the statutory retirement age.`,
         rows: [['Contribution', sgd(amt)], ['Tax relief at your rate', sgd(relief), relief], ['Balance at withdrawal', sgd(end), end], ['Part taxed at withdrawal', sgd(end * P.srs.taxableShare)]],
-        note: `SRS caps: ${sgd(P.srs.capCitizen)} a year for citizens and PRs, ${sgd(P.srs.capForeigner)} for foreigners. Personal relief is capped at ${sgd(P.srs.reliefCap)} in total across reliefs.`,
+        note: `SRS caps: ${sgd(P.srs.capCitizen)} a year for citizens and PRs, ${sgd(P.srs.capForeigner)} for foreigners. Personal relief is capped at ${sgd(P.srs.reliefCap)} in total across reliefs, and relief for a contribution is given in the next Year of Assessment.`,
       };
     },
   }),
@@ -441,10 +441,10 @@ export const SPECS: Record<string, (arg?: Record<string, number | string>) => To
       const ssbI = Math.round(yearByYear(LATEST_ISSUE, Math.floor(amt / SSB.lot) * SSB.lot, yrs).at(-1)!.cumulative);
       const relief = Math.round(Math.min(amt, P.cpf.topupReliefCap) * mr);
       return {
-        label: `CPF top-up earns more over ${yrs} years by`, value: sgd(cpf + relief - ssbI),
+        label: cpf + relief >= ssbI ? `CPF top-up ahead over ${yrs} years by` : `Savings Bond ahead over ${yrs} years by`, value: sgd(Math.abs(cpf + relief - ssbI)),
         sub: `CPF at ${pct(P.cpf.rates.sa)} compounded (${sgd(cpf)}) plus tax relief (${sgd(relief)}), against ${sgd(ssbI)} from the ${month(LATEST_ISSUE.issue)} Savings Bond. The top-up cannot be taken back; the bond can be redeemed in any month.`,
         rows: [['CPF interest', sgd(cpf), cpf], ['Tax relief on the top-up', sgd(relief), relief], ['Savings Bond interest', sgd(ssbI), ssbI]],
-        note: `Tax relief for cash top-ups to your own account is capped at ${sgd(P.cpf.topupReliefCap)} a year (another ${sgd(P.cpf.topupReliefCap)} for family members). Extra interest not counted.`,
+        note: `Tax relief for cash top-ups to your own account is capped at ${sgd(P.cpf.topupReliefCap)} a year (another ${sgd(P.cpf.topupReliefCap)} for family members). Extra interest not counted. The SA rate is used, which is where top-ups go before 55; from 55 they go to the RA, at the same rate this quarter. Tax relief applies to top-ups up to the current Full Retirement Sum; from 55, the RA can be topped up to the Enhanced Retirement Sum (CPF Board).`,
       };
     },
   }),

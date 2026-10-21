@@ -18,7 +18,7 @@
   "cpfAllowed": false
  },
  "tbill": {
-  "_source": "mas_tbill, mas_compare, mas_auction",
+  "_source": "mas_tbill, mas_compare, mas_auction, mas_auction_conduct",
   "min": 1000,
   "lot": 1000,
   "fee": 0,
@@ -231,13 +231,13 @@
    }
   },
   "iras_srs": {
-   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/supplementary-retirement-scheme-(srs)-relief",
+   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/special-tax-schemes/srs-contributions",
    "label": {
     "en": "IRAS, Supplementary Retirement Scheme relief"
    }
   },
   "iras_topup": {
-   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/central-provident-fund-(cpf)-cash-top-up-relief",
+   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/central-provident-fund-%28cpf%29-cash-top-up-relief",
    "label": {
     "en": "IRAS, CPF cash top-up relief"
    }
@@ -282,6 +282,12 @@
    "url": "https://www.mas.gov.sg/terms-of-use",
    "label": {
     "en": "MAS, Terms of use (including Terms of Use of Datasets)"
+   }
+  },
+  "mas_auction_conduct": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/how-sgs-auctions-are-conducted",
+   "label": {
+    "en": "MAS, How SGS auctions are conducted"
    }
   }
  }

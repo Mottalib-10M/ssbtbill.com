@@ -21,7 +21,7 @@ const cutOfMonth = (term: '6M' | '1Y', ym: string) => { const x = K.bills(term).
 const over = K.ISSUES.slice(-24).filter(K.oversubscribed).length;
 
 export const HOME = {
-  title: 'Singapore Savings Bonds 2026: SSB, T-Bill and CPF Rates',
+  title: 'SSB, T-Bill and CPF Calculator 2026: Singapore Safe Savings',
   description: `Singapore Savings Bonds, T-bills, fixed deposits and CPF in 2026: what your sum earns in each, year by year, from MAS auction data read every business day.`,
   h1: 'Savings Bond, T-bill, fixed deposit or CPF: what your money earns',
   intro: `Type a sum and a number of years. The calculator below puts the latest Savings Bond, the latest 6-month T-bill, a fixed deposit at the rate you were offered and CPF interest side by side, in dollars.`,

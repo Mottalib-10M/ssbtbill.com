@@ -44,7 +44,7 @@ de la MAS relues chaque jour ouvré. Rapport SERP : `~/Documents/GitHub/reports/
 | Donnée | Source | Fichier |
 |---|---|---|
 | Émissions SSB (coupons 1 à 10, moyennes, dates, taille, demandes, allotment) depuis 2015 | API statistique MAS | `src/data/ssb.json` |
-| Adjudications T-bills 6 mois (BS) et 1 an (BY) depuis 2015 | API statistique MAS | `src/data/tbills.json` |
+| Adjudications T-bills 1 an (BY) depuis 2015, 6 mois (BS) depuis juin 2019 | API statistique MAS | `src/data/tbills.json` |
 | Calendrier annoncé (prochaines SSB, prochaines adjudications) | API MAS (issuance calendar) | `src/data/calendar.json` |
 | SORA quotidien, 12 mois (overnight, 1M/3M/6M compounded) | MAS Domestic Interest Rates | `src/data/sora.json` |
 | Taux moyens des dépôts bancaires (FD 1/3/6/12 mois, épargne), trimestriels depuis 2021 T3 | MAS MSB table III.3A | `src/data/deposits.json` |

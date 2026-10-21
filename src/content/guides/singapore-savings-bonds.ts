@@ -27,7 +27,7 @@ export default defineGuide({
   slug: 'singapore-savings-bonds',
   nav: 'Savings Bonds explained',
   card: 'Coupons, step-up, redemption and allotment in one place',
-  title: 'Singapore Savings Bonds 2026: Rates, Interest and Rules',
+  title: 'Savings Bonds Singapore 2026: SSB Rates, Interest and Rules',
   description: `Singapore Savings Bonds in 2026: the latest issue pays ${K.pc(S.coupon[0])} in year 1 and ${K.pc(S.avg[9])} a year over ten years. Interest on your amount, fees, redemption rules.`,
   h1: 'Singapore Savings Bonds: what they pay and how they work',
   intro: `Enter an amount and how long you would keep the bond. The calculator returns the interest paid each year by the issue you choose, from the coupons MAS published for it.`,
