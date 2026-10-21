@@ -1,0 +1,27 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { contactPageSchema } from '../../lib/seo';
+const lang = 'en';
+const path = route('contact', lang);
+const description = 'Write to the publisher of SG Safe Savings about a Savings Bond rate, a T-bill result, a CPF figure or a source. E-mail only, no advice on your money, nothing to sell.';
+---
+<PageLayout title="Contact SG Safe Savings: corrections to a rate, a result or a source" description={description} lang={lang} noindex={true} jsonLd={[contactPageSchema({ name: 'Contact', description, path, lang })]} breadcrumbs={[{ label: 'Contact' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none prose-headings:font-serif">
+    <h1>Contact</h1>
+    <p>By e-mail: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. No form and no newsletter: the site sells no bond, deposit or account and gives no advice, so it has no reason to collect addresses.</p>
+    <h2>Messages that help</h2>
+    <ul>
+      <li>A Savings Bond coupon, allotment or T-bill result that differs from what MAS published for the same issue: give the issue code (GX… or BS…/BY…) and both figures.</li>
+      <li>A CPF interest rate, retirement sum or extra-interest rule that the CPF Board has changed, with the link to its announcement.</li>
+      <li>A calculation that does not match what your bank or CDP statement shows, with the inputs you used.</li>
+      <li>Embedding the comparison on a community, HR or personal finance site: the code is on the <a href={route('widget', lang)}>embed page</a>.</li>
+    </ul>
+    <h2>What we cannot do</h2>
+    <p>We cannot see your CDP, SRS or CPF account, apply for a bond or a bill on your behalf, or tell anyone where to put their money. For your own holdings, CDP, your SRS operator or the CPF Board hold the records; for a tax question, IRAS.</p>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+  </div>
+</PageLayout>

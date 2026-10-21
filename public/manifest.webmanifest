@@ -1,0 +1,21 @@
+{
+ "name": "SG Safe Savings",
+ "short_name": "SG Safe Savings",
+ "description": "Singapore Savings Bonds, T-bills, fixed deposits and CPF interest: year-by-year interest, auction yields, early redemption cost and a side-by-side comparison.",
+ "start_url": "/en/",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#A3172B",
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

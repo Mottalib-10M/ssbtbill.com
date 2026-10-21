@@ -1,0 +1,21 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route } from '../../i18n/routes';
+import { AUTHOR_NAME, REVIEW_CYCLE_MONTHS } from '../../data/site-config';
+const lang = 'en';
+---
+<PageLayout title="Editorial policy of SG Safe Savings: MAS data, dated rates, fixes" description="How SG Safe Savings writes its Savings Bond, T-bill, deposit and CPF pages: MAS, CPF Board and IRAS texts only, every rate read from a data file, estimates labelled as such." lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none prose-headings:font-serif">
+    <h1>Editorial policy</h1>
+    <h2>What counts as a source</h2>
+    <p>Savings Bond and T-bill figures come from the MAS statistics API and the rules from the MAS pages on each product. Bank deposit averages come from table III.3A of the MAS Monthly Statistical Bulletin and SORA from MAS's domestic interest rates series. CPF rates, extra interest, retirement sums and CPF LIFE estimates come from the CPF Board's releases and pages; SRS and top-up relief from IRAS; deposit insurance from SDIC. Bank pages, blogs and forums are read to know what people ask, never as the source of a number, and no bank is ranked.</p>
+    <h2>How a figure reaches a page</h2>
+    <p>No amount is typed into the text. Data files hold each rate and rule with its source and the date it was read; the calculators and the pages read those files. A script reads the MAS API every business day and the site is rebuilt when something changed. The T-bill price formula is tested against every cut-off price MAS published since 2015, and the Savings Bond engine against worked cases: if the engine or a figure drifts, the site does not build.</p>
+    <h2>Estimates are labelled</h2>
+    <p>A T-bill yield before its auction, or a Savings Bond issue before MAS announces it, is never shown as a value. The only estimate on the site, the next T-bill cut-off, is the last cut-off carried forward, shown with the word estimate and with its average error over the last 26 auctions. CPF LIFE amounts between the three CPF Board estimates are our straight-line interpolation and say so.</p>
+    <h2>Independence</h2>
+    <p>{AUTHOR_NAME} receives nothing from banks, brokers, robo-advisers or insurers and links to none of them. The three local banks are named only as the channels MAS lists for applications. There is no advertising today; if some is added it will be labelled, limited to three places a page, and never come from a firm selling deposits, bonds or investments.</p>
+    <h2>Review and corrections</h2>
+    <p>The site is reviewed at least every {REVIEW_CYCLE_MONTHS} months, and in any case on the first business day of each month (new Savings Bond), after each T-bill auction, and when the CPF Board announces the next quarter's rates. A reported error is checked against the source and, once fixed, moves the date shown on the page. Write through the <a href={route('contact', lang)}>contact page</a>; the calculations are explained on the <a href={route('method', lang)}>method page</a>.</p>
+  </div>
+</PageLayout>

@@ -1,0 +1,22 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_URL } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { breadcrumbSchema } from '../../lib/seo';
+const lang = 'en';
+const code = `<iframe src="${SITE_URL}/embed/savings-calculator/" title="Savings Bond, T-bill, deposit and CPF comparison" width="100%" height="1000" style="border:0;max-width:1100px" loading="lazy"></iframe>`;
+---
+<PageLayout title="Embed the Singapore Savings Bond and T-bill comparison" description="Community centres, HR teams and personal finance writers can embed the comparison of the latest Savings Bond, T-bill, fixed deposit and CPF with one line. No cookie set." lang={lang} noindex={true} jsonLd={[breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'Embed the comparison', path: route('widget', lang) }])]} breadcrumbs={[{ label: 'Embed the comparison' }]} showAuthor={false}>
+  <header class="mb-6">
+    <h1 class="font-serif text-3xl font-bold text-navy-900 md:text-4xl">Embed the comparison on your site</h1>
+    <p class="mt-3 text-lg text-navy-700">One line of code. Each time MAS publishes a new Savings Bond or a T-bill result, the embedded comparison follows on our next refresh.</p>
+  </header>
+  <div class="prose prose-slate max-w-none">
+    <p>Conditions: keep the credit line under the frame visible, do not change the frame, and do not place it next to an offer to sell a deposit, a bond or an investment product. The frame sets no cookie and sends us nothing about your readers. Questions go through the <a href={route('contact', lang)}>contact page</a>.</p>
+    <h2>Latest Savings Bond, 6-month T-bill, fixed deposit and CPF, for one sum</h2>
+    <pre class="overflow-x-auto rounded-lg bg-navy-900 p-4 text-sm text-white"><code>{code}</code></pre>
+  </div>
+  <div class="mt-8 overflow-hidden rounded-xl border border-navy-200">
+    <iframe src="/embed/savings-calculator/" title="Savings Bond, T-bill, deposit and CPF comparison" width="100%" height="1000" style="border:0" loading="lazy"></iframe>
+  </div>
+</PageLayout>

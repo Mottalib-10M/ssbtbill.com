@@ -1,0 +1,71 @@
+---
+/** Method: every rule, every formula, the tests, the limits. Figures from the kit. */
+import PageLayout from '../../layouts/PageLayout.astro';
+import { route } from '../../i18n/routes';
+import { KIT as K } from '../../lib/kit';
+import { src, table } from '../../lib/helpers';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo';
+const lang = 'en';
+const path = route('method', lang);
+const P = K.P, C = P.cpf, X = C.extra;
+const title = 'SSB and T-Bill Calculator Method 2026: MAS Data and Formulas';
+const description = 'How the 2026 Savings Bond, T-bill, deposit and CPF calculators work: MAS data read every business day, the T-bill price formula checked on every auction since 2015.';
+const S = K.LATEST, b6 = K.bill('6M');
+const ex = K.buy(10000, b6.cutoff, b6.days);
+const red = K.redeem(S.code, 10000, 9);
+const est6 = K.estimate('6M'), est1 = K.estimate('1Y');
+const nBills = K.bills('6M').length + K.bills('1Y').length;
+const dep = K.dep();
+const so = K.sora();
+const lifeRows = (P.life.rows as Array<[number, number, number]>).map(([ra, p]) => [K.sgd(ra), K.sgd(p)]);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[webPageSchema({ name: 'How we calculate', description, path, lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'How we calculate', path }])]} breadcrumbs={[{ label: 'How we calculate' }]}>
+  <article class="prose prose-slate max-w-none prose-headings:font-serif">
+    <h1>How the calculators work</h1>
+    <p>Every calculator on this site runs in your browser on one engine and a few data files: the Savings Bond issues and T-bill auctions published by MAS, the issuance calendar, the SORA series, the average bank deposit rates of the MAS Monthly Statistical Bulletin, and the CPF, IRAS and SDIC rules of {P.year}. Each file says where its figures come from and when they were read. Rules were read on {K.day(P.retrieved_at)}; auction data was last changed on {K.day(K.BILLS_READ > K.SSB_READ ? K.BILLS_READ : K.SSB_READ)}.</p>
+
+    <h2>1. Where the data comes from and how often</h2>
+    <p>A script reads the MAS statistics API every business day at 10:30am Singapore time: the list of Savings Bond issues with their allotment results (<Fragment set:html={src('mas_api_ssb', 'listsavingbonds')} />), their ten coupons and average returns (<Fragment set:html={src('mas_api_ssbi', 'savingbondsinterest')} />), every 6-month and 1-year T-bill auction since 2015 (<Fragment set:html={src('mas_api_bills', 'listbondsandbills')} />, product type B), the issuance calendar, twelve months of daily SORA from MAS's <Fragment set:html={src('mas_dir', 'domestic interest rates')} /> and table III.3A of the <Fragment set:html={src('mas_msb_iii3a', 'Monthly Statistical Bulletin')} />. It refuses to write a file when an answer looks wrong (too few issues, a coupon outside 0 to 10 %, a T-bill price outside 90 to 100), so a bad answer never reaches the site, and it rewrites a file only when the data itself changed. The site is then tested and rebuilt.</p>
+
+    <h2>2. Savings Bond interest</h2>
+    <p>Each issue has ten coupons fixed at issue, one per year held. Interest is paid every six months from the issue date: half the coupon of the current year, on the amount held, rounded to the cent (<Fragment set:html={src('mas_ssb_invest', 'MAS, Savings Bonds')} />). The interest of a year is the sum of its two payments. The average return per year held is the figure MAS publishes with each issue; we show it as published. Coupons are not reinvested, because MAS pays them into the bank account linked to CDP or into the SRS account. Amounts are rounded down to multiples of {K.sgd(P.ssb.lot)} and capped at the {K.sgd(P.ssb.maxHolding)} holding limit.</p>
+
+    <h2>3. Early redemption</h2>
+    <p>A bond redeemed in a given month returns its face value plus the interest accrued since the last coupon date (<Fragment set:html={src('mas_ssb_redeem', 'MAS, how to redeem')} />). We count the accrual as the half-year coupon multiplied by the days elapsed since the last coupon date and divided by the days in that half-year, rounded to the cent, then subtract the {K.sgd(P.ssb.redemptionFee)} fee. For {K.sgd(10000)} of {S.code} redeemed nine months after issue: one coupon paid ({K.sgd2(red.couponsPaid)}), {K.sgd2(red.accrued)} accrued, {K.sgd2(red.net)} after the fee. The exact day count MAS uses may move this by a few cents; the redemption is paid by the {P.ssb.redemptionPaid}.</p>
+
+    <h2>4. Allotment</h2>
+    <p>For every issue MAS publishes the amount up to which applications were allotted in full and, above it, the share of applicants who received one more {K.sgd(P.ssb.lot)} lot by random draw. The allotment calculator applies those two published figures to the amount you would have applied for. It cannot say what the next issue will allot: that depends on applications not yet made.</p>
+
+    <h2>5. T-bill price and return</h2>
+    <p>T-bills pay no coupon: they are issued at a discount and repaid at face value (<Fragment set:html={src('mas_tbill', 'MAS, T-bills')} />). MAS publishes the cut-off yield and the cut-off price of each auction. Every published price since 2015 matches price per {K.sgd(100)} = 100 × (1 − yield × days ÷ 365), rounded to three decimals; the test runs on all {K.num(nBills)} auctions at every build. On the {K.day(b6.auction)} auction, {K.pc(b6.cutoff)} for {b6.days} days gives {K.dec(ex.price, 3)}: {K.sgd(10000)} of face value costs {K.sgd2(ex.cost)} and pays {K.sgd2(ex.interest)} at maturity. The return on the cash actually paid is (100 − price) ÷ price × 365 ÷ days, {K.pct(ex.yearly, 3)} here, slightly above the quoted yield because the cash paid is less than face value. MAS publishes no bank fee for T-bill applications, so none is counted.</p>
+
+    <h2>6. The next T-bill estimate, and its error</h2>
+    <p>No one knows a cut-off before the auction. The site shows a naive estimate: the last cut-off of the same tenor, carried forward. We publish its record so that it is read for what it is. Over the last {est6.count} 6-month auctions, the gap between one cut-off and the next averaged {K.dec(est6.mae, 2)} percentage point, and was {K.dec(est6.p80, 2)} point or less eight times in ten; for 1-year bills, over {est1.count} auctions, {K.dec(est1.mae, 2)} point on average. The range shown around the estimate is that eight-in-ten gap. It is not a forecast and does not come from MAS.</p>
+
+    <h2>7. Deposits and savings accounts</h2>
+    <p>A fixed deposit earns simple interest at the rate offered, paid at maturity: amount × rate × months ÷ 12, rounded to the cent. When a deposit is renewed, the interest is added to the next one. Banks count days, so a real deposit can differ by a few cents. The default rate is the weighted average for 12-month deposits in table III.3A of the MAS Monthly Statistical Bulletin, {K.pct(dep.fd12 / 100)} in {dep.q}; it is an average of all outstanding deposits, not an offer. Tiered savings accounts apply each tier's rate to the part of the balance in that tier. Deposit insurance covers up to {K.sgd(P.sdic.limit)} per depositor per bank (<Fragment set:html={src('sdic', 'SDIC')} />); Savings Bonds and T-bills are not deposits.</p>
+
+    <h2>8. SORA</h2>
+    <p>The Singapore Overnight Rate Average for a business day is published by 9am the next business day (<Fragment set:html={src('mas_sora', 'MAS, SORA')} />). The site keeps twelve months of daily values: the overnight rate and the 1, 3 and 6-month compounded averages. The latest in the data is {K.day(so.date)}: {K.dec(so.overnight, 4)} % overnight, {K.dec(so.c3m ?? 0, 4)} % for 3-month compounded SORA. The loan illustration adds the spread you type to 3-month compounded SORA and computes a level monthly instalment at that rate; real loans reset at each period.</p>
+
+    <h2>9. CPF interest</h2>
+    <p>From {C.quarterLabel}, the Ordinary Account earns {K.pct(C.rates.oa, 1)} and the Special, MediSave and Retirement Accounts earn {K.pct(C.rates.sa, 1)} (<Fragment set:html={src('cpf_pr_2026_09_22', 'CPF Board release')} />). Members under 55 earn an extra {K.pct(X.under55.rate, 0)} on the first {K.sgd(X.under55.on)} of combined balances, with at most {K.sgd(X.oaCap)} counted from the OA. Members aged 55 and above earn an extra {K.pct(X.over55.first.rate, 0)} on the first {K.sgd(X.over55.first.on)} and {K.pct(X.over55.next.rate, 0)} on the next {K.sgd(X.over55.next.on)}, with the same OA cap. CPF computes interest monthly on the lowest balance of each month and credits it once a year, so with balances that stay put the yearly figure equals balance × rate. Extra interest earned because of the OA is paid into the SA or RA; the projection to 55 credits all extra interest to the SA. Projections hold today's rates constant, which the CPF Board does not promise beyond the floors: {K.pct(C.floors.oa, 1)} for the OA and {K.pct(C.floors.smra, 0)} for the SA, MA and RA until {K.day(C.floors.smraFloorUntil)}. MediSave above the Basic Healthcare Sum of {K.sgd(C.bhs)} flows to the SA in the projection.</p>
+
+    <h2>10. Retirement sums and CPF LIFE</h2>
+    <p>For members turning 55 in {P.retirement.year}, the Basic, Full and Enhanced Retirement Sums are {K.sgd(P.retirement.brs)}, {K.sgd(P.retirement.frs)} and {K.sgd(P.retirement.ers)} (<Fragment set:html={src('cpf_rs', 'CPF Board')} />). The CPF Board publishes three monthly payout estimates from 65 for those sums, on the Standard plan at 4 % interest. Between two of them, the calculator draws a straight line; that interpolation is ours, not a CPF figure, and outside the range it shows nothing.</p>
+    <Fragment set:html={table(['Retirement Account at 55', 'Estimated monthly payout from 65'], lifeRows, `CPF Board estimates for members turning 55 in ${P.retirement.year}, CPF LIFE Standard plan.`, ['l', 'r'])} />
+
+    <h2>11. Tax</h2>
+    <p>Interest on Singapore Government Securities, which include Savings Bonds and T-bills, is tax-exempt for individuals (<Fragment set:html={src('mas_tax', 'MAS')} />), and interest on deposits with approved banks is not taxable (<Fragment set:html={src('iras_interest', 'IRAS')} />). The SRS calculator applies the yearly caps of {K.sgd(P.srs.capCitizen)} for citizens and permanent residents and {K.sgd(P.srs.capForeigner)} for foreigners, and taxes {K.pct(P.srs.taxableShare, 0)} of withdrawals made from the statutory retirement age (<Fragment set:html={src('iras_srs', 'IRAS')} />). Your marginal tax rate is an input, not computed. Cash top-up relief is capped at {K.sgd(C.topupReliefCap)} a year for your own account and {K.sgd(C.topupReliefFamilyCap)} for family members (<Fragment set:html={src('iras_topup', 'IRAS')} />).</p>
+
+    <h2>12. What is not modelled</h2>
+    <ul>
+      <li>Your contributions from salary: the CPF pages start from balances you type, not from a wage.</li>
+      <li>Bank or agent charges on T-bill and CPFIS applications, which MAS does not publish.</li>
+      <li>Selling a T-bill before maturity on the secondary market, and SGS bonds other than T-bills.</li>
+      <li>Bonus conditions of savings accounts (salary credit, card spend): type the rate you actually get.</li>
+      <li>Housing withdrawals, CPF LIFE plans other than Standard and the Retirement Sum Scheme.</li>
+    </ul>
+    <p>Corrections: <a href={route('contact', lang)}>contact page</a>. These are calculations from published rules, not personal financial or tax advice.</p>
+  </article>
+</PageLayout>

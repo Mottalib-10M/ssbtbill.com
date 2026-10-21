@@ -1,0 +1,288 @@
+{
+ "_readme": "Every rule and rate of the site lives here, each with its source key (RECETTE §4). Auction data (ssb.json, tbills.json, sora.json) comes from the MAS API through scripts/update-data.mjs, not from this file. Values read on the pages cited, on retrieved_at.",
+ "year": 2026,
+ "retrieved_at": "2026-10-21",
+ "valid_from": "2026-10-01",
+ "valid_to": "2026-12-31",
+ "ssb": {
+  "_source": "mas_ssb_invest, mas_ssb_buy, mas_ssb_redeem",
+  "min": 500,
+  "lot": 500,
+  "maxHolding": 200000,
+  "fee": 2,
+  "redemptionFee": 2,
+  "opens": "6pm on the 1st business day of the month",
+  "closes": "9pm on the 4th last business day of the month",
+  "results": "3rd last business day of the month",
+  "redemptionPaid": "second business day of the next month",
+  "cpfAllowed": false
+ },
+ "tbill": {
+  "_source": "mas_tbill, mas_compare, mas_auction",
+  "min": 1000,
+  "lot": 1000,
+  "fee": 0,
+  "ncLimit": 1000000,
+  "cpfCharges": 0,
+  "cpfNote": "OA money can be invested only above the first S$20,000 kept in the OA (CPF Board). Agent bank charges vary by bank and are not counted here; enter them by lowering the yield if your bank charges.",
+  "auctionTiming": "Auctions typically take place 3 business days before issuance and are announced on the SGS website 5 business days before the auction",
+  "feeNote": "MAS pages do not state a bank fee for T-bill applications; the calculations count none. If your bank charges one, the yield you keep is lower by that amount."
+ },
+ "cpf": {
+  "_source": "cpf_pr_2026_09_22, cpf_interest, cpf_bhs_2026",
+  "quarterLabel": "1 October to 31 December 2026",
+  "rates": {
+   "oa": 0.025,
+   "sa": 0.04,
+   "ma": 0.04,
+   "ra": 0.04
+  },
+  "floors": {
+   "oa": 0.025,
+   "smra": 0.04,
+   "smraFloorUntil": "2027-12-31"
+  },
+  "smraPeg": {
+   "text": "12-month average yield of 10-year SGS plus 1%",
+   "average10y": 0.0306,
+   "period": "August 2025 to July 2026"
+  },
+  "hdbRate": 0.026,
+  "extra": {
+   "oaCap": 20000,
+   "under55": {
+    "rate": 0.01,
+    "on": 60000
+   },
+   "over55": {
+    "first": {
+     "rate": 0.02,
+     "on": 30000
+    },
+    "next": {
+     "rate": 0.01,
+     "on": 30000
+    }
+   }
+  },
+  "investOaAbove": 20000,
+  "investSaAbove": 40000,
+  "topupReliefCap": 8000,
+  "topupReliefFamilyCap": 8000,
+  "bhs": 79000
+ },
+ "retirement": {
+  "_source": "cpf_rs",
+  "year": 2026,
+  "brs": 110200,
+  "frs": 220400,
+  "ers": 440800,
+  "next": {
+   "year": 2027,
+   "brs": 114100,
+   "frs": 228200,
+   "ers": 456400
+  }
+ },
+ "life": {
+  "_source": "cpf_rs",
+  "plan": "Standard",
+  "note": "CPF Board estimate for members turning 55 in 2026, payouts from 65, at 4% interest",
+  "rows": [
+   [
+    110200,
+    950,
+    950
+   ],
+   [
+    220400,
+    1780,
+    1780
+   ],
+   [
+    440800,
+    3440,
+    3440
+   ]
+  ]
+ },
+ "srs": {
+  "_source": "iras_srs",
+  "capCitizen": 15300,
+  "capForeigner": 35700,
+  "taxableShare": 0.5,
+  "reliefCap": 80000
+ },
+ "sdic": {
+  "_source": "sdic",
+  "limit": 100000
+ },
+ "deposit": {
+  "_source": "mas_msb_iii3a",
+  "note": "Default rates are read from src/data/deposits.json (MAS MSB table III.3A), not from here"
+ },
+ "sources": {
+  "mas_ssb": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/singapore-savings-bonds",
+   "label": {
+    "en": "MAS, Singapore Savings Bonds"
+   }
+  },
+  "mas_ssb_buy": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds/how-to-buy",
+   "label": {
+    "en": "MAS, How to buy Savings Bonds"
+   }
+  },
+  "mas_ssb_redeem": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds/how-to-redeem",
+   "label": {
+    "en": "MAS, How to redeem Savings Bonds"
+   }
+  },
+  "mas_ssb_invest": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds",
+   "label": {
+    "en": "MAS, Guide to investing in Savings Bonds"
+   }
+  },
+  "mas_tbill": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/singapore-government-t-bills-information-for-individuals",
+   "label": {
+    "en": "MAS, SGS T-bills: information for individuals"
+   }
+  },
+  "mas_auction": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/buy-sgs-bonds-and-t-bills-at-auction-for-individuals",
+   "label": {
+    "en": "MAS, Buy SGS bonds and T-bills at auction"
+   }
+  },
+  "mas_compare": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/compare-products-for-individuals",
+   "label": {
+    "en": "MAS, Compare SGS bonds, T-bills and Savings Bonds"
+   }
+  },
+  "mas_tax": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/understanding-singapores-bond-market/tax-for-sgs-and-mas-issued-securities",
+   "label": {
+    "en": "MAS, Tax for SGS and MAS-issued securities"
+   }
+  },
+  "mas_accrued": {
+   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/accrued-interest-and-dirty-prices",
+   "label": {
+    "en": "MAS, Accrued interest and dirty prices"
+   }
+  },
+  "mas_api_ssb": {
+   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/listsavingbonds",
+   "label": {
+    "en": "MAS statistics API, Savings Bonds issues and allotment"
+   }
+  },
+  "mas_api_ssbi": {
+   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/savingbondsinterest",
+   "label": {
+    "en": "MAS statistics API, Savings Bonds interest rates"
+   }
+  },
+  "mas_api_bills": {
+   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/listbondsandbills",
+   "label": {
+    "en": "MAS statistics API, SGS bonds and bills auctions"
+   }
+  },
+  "cpf_interest": {
+   "url": "https://www.cpf.gov.sg/member/growing-your-savings/earning-higher-returns/earning-attractive-interest",
+   "label": {
+    "en": "CPF Board, Earning attractive interest"
+   }
+  },
+  "cpf_pr_2026_09_22": {
+   "url": "https://www.cpf.gov.sg/member/infohub/news/news-releases/government-extends-4-per-cent-interest-rate-floor-on-special-medisave-and-retirement-account-monies-until-31-december-2027",
+   "label": {
+    "en": "CPF Board, news release of 22 September 2026 (rates from 1 October 2026)"
+   }
+  },
+  "cpf_55": {
+   "url": "https://www.cpf.gov.sg/member/retirement-income/milestones/reaching-age-55",
+   "label": {
+    "en": "CPF Board, Reaching age 55"
+   }
+  },
+  "cpf_life": {
+   "url": "https://www.cpf.gov.sg/member/retirement-income/monthly-payouts/cpf-life",
+   "label": {
+    "en": "CPF Board, CPF LIFE"
+   }
+  },
+  "cpf_rs": {
+   "url": "https://www.cpf.gov.sg/member/infohub/educational-resources/what-is-the-cpf-retirement-sum",
+   "label": {
+    "en": "CPF Board, What is the CPF retirement sum"
+   }
+  },
+  "cpf_invest": {
+   "url": "https://www.cpf.gov.sg/member/growing-your-savings/earning-higher-returns/investing-your-cpf-savings",
+   "label": {
+    "en": "CPF Board, Investing your CPF savings"
+   }
+  },
+  "iras_srs": {
+   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/supplementary-retirement-scheme-(srs)-relief",
+   "label": {
+    "en": "IRAS, Supplementary Retirement Scheme relief"
+   }
+  },
+  "iras_topup": {
+   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/central-provident-fund-(cpf)-cash-top-up-relief",
+   "label": {
+    "en": "IRAS, CPF cash top-up relief"
+   }
+  },
+  "cpf_bhs_2026": {
+   "url": "https://www.cpf.gov.sg/member/infohub/news/news-releases/cpf-interest-rates-from-1-january-to-31-march-2026-and-basic-healthcare-sum-for-2026",
+   "label": {
+    "en": "CPF Board, news release of 15 December 2025 (Basic Healthcare Sum 2026)"
+   }
+  },
+  "sdic": {
+   "url": "https://www.sdic.org.sg/di_faq/",
+   "label": {
+    "en": "SDIC, Deposit Insurance FAQ"
+   }
+  },
+  "mas_msb_iii3a": {
+   "url": "https://www.mas.gov.sg/statistics/monthly-statistical-bulletin/iii-3a-commercial-banks-deposit-rate-of-sg-dollar-denominated-deposits-offered-to-non-bank-customers",
+   "label": {
+    "en": "MAS, Monthly Statistical Bulletin table III.3A (bank deposit rates)"
+   }
+  },
+  "mas_sora": {
+   "url": "https://www.mas.gov.sg/monetary-policy/sora",
+   "label": {
+    "en": "MAS, Singapore Overnight Rate Average (SORA)"
+   }
+  },
+  "mas_dir": {
+   "url": "https://eservices.mas.gov.sg/statistics/dir/DomesticInterestRates.aspx",
+   "label": {
+    "en": "MAS, Domestic Interest Rates (daily SORA)"
+   }
+  },
+  "iras_interest": {
+   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/interest",
+   "label": {
+    "en": "IRAS, Interest: what is taxable"
+   }
+  },
+  "mas_terms": {
+   "url": "https://www.mas.gov.sg/terms-of-use",
+   "label": {
+    "en": "MAS, Terms of use (including Terms of Use of Datasets)"
+   }
+  }
+ }
+}

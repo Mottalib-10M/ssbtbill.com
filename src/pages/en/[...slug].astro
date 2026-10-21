@@ -1,0 +1,10 @@
+---
+/** Every topic page (src/content/guides). */
+import ContentPage from '../../components/ContentPage.astro';
+import { GUIDES } from '../../lib/pages';
+export function getStaticPaths() {
+  return GUIDES.map((page) => ({ params: { slug: page.slug }, props: { def: page } }));
+}
+const { def } = Astro.props;
+---
+<ContentPage page={def} />

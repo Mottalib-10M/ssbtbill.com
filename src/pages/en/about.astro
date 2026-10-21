@@ -1,0 +1,33 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { route } from '../../i18n/routes';
+import { AUTHOR_NAME, AUTHOR_DESC, CONTACT_EMAIL } from '../../data/site-config';
+import { src } from '../../lib/helpers';
+import { KIT as K } from '../../lib/kit';
+import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
+const lang = 'en';
+const path = route('about', lang);
+const title = 'SG Safe Savings 2026: who builds these SSB and CPF calculators';
+const description = 'SG Safe Savings is published by Radif Partners: Savings Bond, T-bill, deposit and CPF calculators built on MAS and CPF Board data, with no e-mail and no bank behind.';
+const nIssues = K.ISSUES.length, nBills = K.bills('6M').length + K.bills('1Y').length;
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'About', path }])]} breadcrumbs={[{ label: 'About' }]}>
+  <article class="prose prose-slate max-w-none prose-headings:font-serif">
+    <h1>About SG Safe Savings</h1>
+    <p>{AUTHOR_DESC.en}</p>
+    <h2>The gap this site fills</h2>
+    <p>Every month MAS announces the ten coupons of a new Savings Bond, and twice a month it publishes the cut-off yield of a 6-month T-bill. The CPF Board announces its interest rates every quarter. Each publication answers one product, in per cent. The question savers bring to a search engine is different: what does my sum earn here or there over the years I have in mind, and what happens if I need the money back early? The pages that rank first either repeat a rate without a calculator or show a table frozen on the day it was written.</p>
+    <p>This site does better than the first Google result because, where the MAS page gives the rate of a Singapore Savings Bond without a single input field, it turns every Savings Bond issue, every 6-month and 1-year T-bill auction and the CPF rates into dollars of interest year by year for your amount and horizon, compares the four places on one screen and works out the cost of an early redemption, with MAS data read again every business day, no e-mail asked and nothing to sell.</p>
+    <h2>Who publishes it</h2>
+    <p>The site is published by {AUTHOR_NAME}, a company that builds calculators on public rules. It is not a bank, a broker, a financial adviser, a capital markets services licence holder or a government agency, receives no commission and has no partner to send you to. It is not affiliated with the Monetary Authority of Singapore, the CPF Board, IRAS or SDIC. Pages carry no affiliate link.</p>
+    <LegalIdentity lang={lang} />
+    <h2>What we rely on</h2>
+    <p>The MAS statistics API for the {nIssues} Savings Bond issues and {nBills} T-bill auctions since 2015 (<Fragment set:html={src('mas_api_ssb', 'Savings Bonds')} />, <Fragment set:html={src('mas_api_bills', 'bonds and bills')} />), the MAS product pages on <Fragment set:html={src('mas_ssb_invest', 'Savings Bonds')} /> and <Fragment set:html={src('mas_tbill', 'T-bills')} />, table III.3A of the <Fragment set:html={src('mas_msb_iii3a', 'MAS Monthly Statistical Bulletin')} /> for bank deposit rates, MAS's daily <Fragment set:html={src('mas_dir', 'SORA')} /> series, the CPF Board's <Fragment set:html={src('cpf_pr_2026_09_22', 'interest rate release')} /> and <Fragment set:html={src('cpf_rs', 'retirement sums')} />, IRAS on <Fragment set:html={src('iras_srs', 'SRS')} /> and <Fragment set:html={src('iras_topup', 'top-up relief')} />, and SDIC on <Fragment set:html={src('sdic', 'deposit insurance')} />.</p>
+    <p>MAS datasets are used under the MAS Terms of Use of Datasets (Singapore Open Data Licence version 1.0): contains information from the MAS statistics on Savings Bonds, SGS bonds and bills, domestic interest rates and bank deposit rates, accessed on {K.day(K.SSB_READ)} from mas.gov.sg, made available under the <Fragment set:html={src('mas_terms', 'MAS Terms of Use of Datasets')} />. Their use here does not suggest any official status or endorsement by MAS.</p>
+    <h2>What the site leaves out</h2>
+    <p>We cannot see your CDP or CPF account, apply for a bond, tell you whether an application went through, or rank banks: deposit offers are typed by you. The next T-bill yield is never presented as known; the home page shows a naive estimate with its past error. The <a href={route('method', lang)}>method page</a> lists every formula and its limits; the <a href={route('editorial', lang)}>editorial policy</a> explains corrections.</p>
+    <h2>Contact</h2>
+    <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>, for corrections and sources. We answer questions about a rule, not about your personal situation.</p>
+  </article>
+</PageLayout>

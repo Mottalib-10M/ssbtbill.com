@@ -1,0 +1,81 @@
+---
+/**
+ * Home, in its own order: the four-way comparison first; then the auction board (the Savings Bond open
+ * now, the next T-bill auction, CPF rates) in two columns; the folded answer; twelve months of rates
+ * side by side; why the comparison is worth making; the month's dates; the pages; long text in
+ * accordions. Text: src/content/home.ts.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Clamp from './Clamp.astro';
+import Tool from './Tool.astro';
+import { HOME } from '../content/home';
+import { route, ROUTES } from '../i18n/routes';
+import { GROUPS } from '../i18n/nav';
+import { helpers, SOURCES, table } from '../lib/helpers';
+import { GUIDES } from '../lib/pages';
+import { faqSchema, organizationSchema, websiteSchema, webPageSchema, webApplicationSchema } from '../lib/seo';
+const lang = 'en';
+const x = HOME;
+const path = route('home', lang);
+const h = helpers();
+const sources = x.sources.map((k) => ({ name: SOURCES[k].label, url: SOURCES[k].url }));
+const jsonLd = [websiteSchema(lang), organizationSchema(lang), webPageSchema({ name: x.h1, description: x.description, path, lang }), webApplicationSchema({ name: x.h1, description: x.description, path, lang }), faqSchema(x.faqs, lang)];
+const has = (id: string) => ROUTES.some((r) => r.id === id);
+---
+<PageLayout title={x.title} description={x.description} lang={lang} jsonLd={jsonLd} faqs={x.faqs} sources={sources}>
+  <header class="mb-4">
+    <h1 class="font-serif text-[1.75rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">{x.h1}</h1>
+    <p class="mt-2 text-base text-navy-700 sm:text-lg">{x.intro}</p>
+  </header>
+  <div data-outil data-chrome><Tool kind="compare" idPrefix="home" /></div>
+  <p class="mt-3 text-sm text-navy-600">{x.trust} · <a href={route('method', lang)} class="underline">How we calculate</a> · <a href={route('about', lang)} class="underline">Who publishes this</a></p>
+
+  <section data-chrome class="my-8 grid gap-6 md:grid-cols-2" aria-label="Auction board">
+    {x.board.map((c) => (
+      <div class="border-t-2 border-accent-500 pt-3">
+        <p class="text-xs font-semibold uppercase tracking-wide text-accent-700">{c.k}</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{c.title}</p>
+        <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+          {c.lines.map(([a, b]) => <><dt class="text-navy-600">{a}</dt><dd class="tabular-nums text-right text-navy-900">{b}</dd></>)}
+        </dl>
+        {has(c.id) && <a href={route(c.id, lang)} class="mt-2 inline-block text-sm font-medium text-accent-700 underline">{c.l}</a>}
+      </div>
+    ))}
+  </section>
+
+  <Clamp text={x.resume} lang={lang} id="clamp-home" class="my-8" />
+
+  <section class="my-10">
+    <h2 class="font-serif text-2xl font-bold text-navy-900">{x.monthsTitle}</h2>
+    <p class="mt-2 text-navy-700">{x.monthsIntro}</p>
+    <Fragment set:html={table(x.monthsHead, x.monthsRows, x.monthsCaption, ['l', 'r', 'r', 'r', 'r'])} />
+  </section>
+
+  <section class="prose prose-slate max-w-none prose-headings:font-serif"><Fragment set:html={x.why(h)} /></section>
+
+  <section class="mt-10">
+    <h2 class="font-serif text-2xl font-bold text-navy-900">{x.datesTitle}</h2>
+    <ol class="mt-3 border-l border-navy-200 pl-5 text-navy-800">
+      {x.dates.map(([d, t]) => <li class="mb-3"><span class="tabular-nums block text-sm font-semibold text-navy-900">{d}</span><span class="text-sm">{t}</span></li>)}
+    </ol>
+  </section>
+
+  <section class="mt-10" data-chrome>
+    <h2 class="font-serif text-2xl font-bold text-navy-900">Every calculator, by subject</h2>
+    <div class="mt-4 grid gap-x-8 gap-y-6 md:grid-cols-2">
+      {GROUPS.map((g) => (
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-navy-600">{g.label}</h3>
+          <ul class="mt-2 divide-y divide-navy-100 text-sm">
+            {GUIDES.filter((p) => p.group === g.id).map((p) => <li class="py-2"><a href={route(p.id, lang)} class="font-medium text-accent-700 underline-offset-2 hover:underline">{p.nav}</a><span class="block text-navy-600">{p.card}</span></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="font-serif text-2xl font-bold text-navy-900">Before you move your cash</h2>
+    {x.sections(h).map((s) => <details class="fold"><summary><h3 class="fold-h">{s.title}</h3></summary><div class="prose prose-slate max-w-none pb-4"><Fragment set:html={s.html} /></div></details>)}
+  </section>
+</PageLayout>
