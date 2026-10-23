@@ -1,6 +1,6 @@
 {
- "name": "SG Safe Savings",
- "short_name": "SG Safe Savings",
+ "name": "SSB T-bill",
+ "short_name": "SSB T-bill",
  "description": "Singapore Savings Bonds, T-bills, fixed deposits and CPF interest: year-by-year interest, auction yields, early redemption cost and a side-by-side comparison.",
  "start_url": "/en/",
  "display": "standalone",

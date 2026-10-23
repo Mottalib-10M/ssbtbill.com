@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /*?*
 
-Sitemap: https://sg-safe-savings.example/sitemap-index.xml
+Sitemap: https://ssbtbill.com/sitemap-index.xml

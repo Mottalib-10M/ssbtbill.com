@@ -1,6 +1,6 @@
 /** Configuration centrale du site (générée par new-site.py). */
-export const SITE_URL = "https://sg-safe-savings.example";
-export const SITE_NAMES: Record<string, string> = {"en": "SG Safe Savings"};
+export const SITE_URL = "https://ssbtbill.com";
+export const SITE_NAMES: Record<string, string> = {"en": "SSB T-bill"};
 export const LANG_TAGS: Record<string, string> = {"en": "en-SG"};
 export const OG_LOCALES: Record<string, string> = {"en": "en_SG"};
 export const LOCALE_TAG = 'en-SG';
@@ -16,7 +16,7 @@ export const AUTHOR_DESC: Record<string, string> = {"en": "Radif Partners rebuil
  *  themes reellement traites par le site, pas une liste de mots-cles : un sujet
  *  declare ici sans page qui le couvre est une declaration fausse. */
 export const KNOWS_ABOUT: Record<string, string[]> = {"en": ["Singapore Savings Bonds step-up interest", "Singapore Government Securities T-bill auctions", "Cut-off yield and T-bill pricing", "CPF Ordinary, Special, MediSave and Retirement Account interest", "CPF retirement sums and CPF LIFE", "Singapore Overnight Rate Average (SORA)"]};
-export const CONTACT_EMAIL = "contact@sg-safe-savings.example";
+export const CONTACT_EMAIL = "contact@ssbtbill.com";
 export const THEME_COLOR = '#A3172B';
 export const LOGO_SYMBOL = '%';
 export const BING_VERIFY_CODE = '';

@@ -8,13 +8,13 @@ import { KIT as K } from '../../lib/kit';
 import { profilePageSchema, breadcrumbSchema } from '../../lib/seo';
 const lang = 'en';
 const path = route('about', lang);
-const title = 'SSB and CPF Calculator Publisher 2026: About SG Safe Savings';
-const description = 'SG Safe Savings is published by Radif Partners: Savings Bond, T-bill, deposit and CPF calculators on MAS and CPF Board data, no e-mail asked, no bank behind.';
+const title = 'SSB and CPF Calculator Publisher 2026: About SSB T-bill';
+const description = 'SSB T-bill is published by Radif Partners: Savings Bond, T-bill, deposit and CPF calculators on MAS and CPF Board data, no e-mail asked, no bank behind.';
 const nIssues = K.ISSUES.length, nBills = K.bills('6M').length + K.bills('1Y').length;
 ---
 <PageLayout title={title} description={description} lang={lang} jsonLd={[profilePageSchema({ path, lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'About', path }])]} breadcrumbs={[{ label: 'About' }]}>
   <article class="prose prose-slate max-w-none prose-headings:font-serif">
-    <h1>About SG Safe Savings</h1>
+    <h1>About SSB T-bill</h1>
     <p>{AUTHOR_DESC.en}</p>
     <h2>The gap this site fills</h2>
     <p>Every month MAS announces the ten coupons of a new Savings Bond, and twice a month it publishes the cut-off yield of a 6-month T-bill. The CPF Board announces its interest rates every quarter. Each publication answers one product, in per cent. The question savers bring to a search engine is different: what does my sum earn here or there over the years I have in mind, and what happens if I need the money back early? The pages that rank first either repeat a rate without a calculator or show a table frozen on the day it was written.</p>
