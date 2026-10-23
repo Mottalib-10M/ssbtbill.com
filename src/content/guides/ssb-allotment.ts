@@ -2,7 +2,8 @@ import { defineGuide } from '../../lib/page-types';
 import { KIT as K } from '../../lib/kit';
 
 const SB = K.P.ssb, A = K.ALLOTTED;
-const ALLOT_URL = 'https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds/allotment-for-oversubscribed-issues';
+// MAS allows links to its home page only (mas.gov.sg/terms-of-use): the page is named in the link text.
+const ALLOT_URL = 'https://www.mas.gov.sg/';
 const done = K.ISSUES.filter((i) => i.done);
 const over = done.filter(K.oversubscribed);
 const lastOver = over[over.length - 1];
@@ -42,7 +43,7 @@ export default defineGuide({
   ],
   body: (h) => `
 <h2>The quantity ceiling, round by round</h2>
-<p>MAS explains the rule with four applicants on its allotment page. The government offers ${K.sgd(10000)} of bonds. A asks for ${K.sgd(2000)}, B for ${K.sgd(4000)}, C for ${K.sgd(5500)} and D for ${K.sgd(6500)}: ${K.sgd(18000)} in total. Each round hands every unfilled applicant ${K.sgd(SB.lot)}. After four rounds, ${K.sgd(8000)} is gone and A is fully served. Round five gives ${K.sgd(1500)} to B, C and D. The last ${K.sgd(500)} cannot go round, so one of the three gets it by draw. The cut-off is ${K.sgd(2500)}: A ends with ${K.sgd(2000)}, B and D with ${K.sgd(2500)}, and C, the lucky one, with ${K.sgd(3000)} (${h.ext(ALLOT_URL, 'MAS, allotment for oversubscribed issues')}).</p>
+<p>MAS explains the rule with four applicants on its allotment page. The government offers ${K.sgd(10000)} of bonds. A asks for ${K.sgd(2000)}, B for ${K.sgd(4000)}, C for ${K.sgd(5500)} and D for ${K.sgd(6500)}: ${K.sgd(18000)} in total. Each round hands every unfilled applicant ${K.sgd(SB.lot)}. After four rounds, ${K.sgd(8000)} is gone and A is fully served. Round five gives ${K.sgd(1500)} to B, C and D. The last ${K.sgd(500)} cannot go round, so one of the three gets it by draw. The cut-off is ${K.sgd(2500)}: A ends with ${K.sgd(2000)}, B and D with ${K.sgd(2500)}, and C, the lucky one, with ${K.sgd(3000)} (${h.ext(ALLOT_URL, 'MAS website, Savings Bonds section: allotment for oversubscribed issues')}).</p>
 <p>The design favours breadth over size. Spreading a limited issue across as many people as possible means a saver asking for ${K.sgd(5000)} is fully served long before someone asking for ${K.sgd(SB.maxHolding)}. In an extreme month, MAS states that if giving ${K.sgd(SB.lot)} to every applicant would exceed the issue, the bonds go to applicants at random, ${K.sgd(SB.lot)} each.</p>
 ${h.mini('ssballot', { t: 'What a modest application received', p: ['amt'], d: { amt: 25000 } })}
 

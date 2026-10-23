@@ -123,129 +123,129 @@
  },
  "sources": {
   "mas_ssb": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/singapore-savings-bonds",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Singapore Savings Bonds"
+    "en": "MAS, Singapore Savings Bonds (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_ssb_buy": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds/how-to-buy",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, How to buy Savings Bonds"
+    "en": "MAS, How to buy Savings Bonds (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_ssb_redeem": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds/how-to-redeem",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, How to redeem Savings Bonds"
+    "en": "MAS, How to redeem Savings Bonds (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_ssb_invest": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-savings-bonds",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Guide to investing in Savings Bonds"
+    "en": "MAS, Guide to investing in Savings Bonds (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_tbill": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/singapore-government-t-bills-information-for-individuals",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, SGS T-bills: information for individuals"
+    "en": "MAS, SGS T-bills: information for individuals (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_auction": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/buy-sgs-bonds-and-t-bills-at-auction-for-individuals",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Buy SGS bonds and T-bills at auction"
+    "en": "MAS, Buy SGS bonds and T-bills at auction (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_compare": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/compare-products-for-individuals",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Compare SGS bonds, T-bills and Savings Bonds"
+    "en": "MAS, Compare SGS bonds, T-bills and Savings Bonds (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_tax": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/understanding-singapores-bond-market/tax-for-sgs-and-mas-issued-securities",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Tax for SGS and MAS-issued securities"
+    "en": "MAS, Tax for SGS and MAS-issued securities (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_accrued": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/accrued-interest-and-dirty-prices",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Accrued interest and dirty prices"
+    "en": "MAS, Accrued interest and dirty prices (mas.gov.sg home page, Bonds and Bills section)"
    }
   },
   "mas_api_ssb": {
-   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/listsavingbonds",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS statistics API, Savings Bonds issues and allotment"
+    "en": "MAS statistics API, Savings Bonds issues and allotment (mas.gov.sg home page, Statistics section, statistics APIs)"
    }
   },
   "mas_api_ssbi": {
-   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/savingbondsinterest",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS statistics API, Savings Bonds interest rates"
+    "en": "MAS statistics API, Savings Bonds interest rates (mas.gov.sg home page, Statistics section, statistics APIs)"
    }
   },
   "mas_api_bills": {
-   "url": "https://eservices.mas.gov.sg/statistics/api/v1/bondsandbills/m/listbondsandbills",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS statistics API, SGS bonds and bills auctions"
+    "en": "MAS statistics API, SGS bonds and bills auctions (mas.gov.sg home page, Statistics section, statistics APIs)"
    }
   },
   "cpf_interest": {
-   "url": "https://www.cpf.gov.sg/member/growing-your-savings/earning-higher-returns/earning-attractive-interest",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, Earning attractive interest"
+    "en": "CPF Board, Earning attractive interest (cpf.gov.sg home page, Growing your savings section)"
    }
   },
   "cpf_pr_2026_09_22": {
-   "url": "https://www.cpf.gov.sg/member/infohub/news/news-releases/government-extends-4-per-cent-interest-rate-floor-on-special-medisave-and-retirement-account-monies-until-31-december-2027",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, news release of 22 September 2026 (rates from 1 October 2026)"
+    "en": "CPF Board, news release of 22 September 2026 (rates from 1 October 2026, cpf.gov.sg home page, News releases)"
    }
   },
   "cpf_55": {
-   "url": "https://www.cpf.gov.sg/member/retirement-income/milestones/reaching-age-55",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, Reaching age 55"
+    "en": "CPF Board, Reaching age 55 (cpf.gov.sg home page, Retirement income section)"
    }
   },
   "cpf_life": {
-   "url": "https://www.cpf.gov.sg/member/retirement-income/monthly-payouts/cpf-life",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, CPF LIFE"
+    "en": "CPF Board, CPF LIFE (cpf.gov.sg home page, Retirement income section)"
    }
   },
   "cpf_rs": {
-   "url": "https://www.cpf.gov.sg/member/infohub/educational-resources/what-is-the-cpf-retirement-sum",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, What is the CPF retirement sum"
+    "en": "CPF Board, What is the CPF retirement sum (cpf.gov.sg home page, Educational resources)"
    }
   },
   "cpf_invest": {
-   "url": "https://www.cpf.gov.sg/member/growing-your-savings/earning-higher-returns/investing-your-cpf-savings",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, Investing your CPF savings"
+    "en": "CPF Board, Investing your CPF savings (cpf.gov.sg home page, Growing your savings section)"
    }
   },
   "iras_srs": {
-   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/special-tax-schemes/srs-contributions",
+   "url": "https://www.iras.gov.sg/",
    "label": {
-    "en": "IRAS, Supplementary Retirement Scheme relief"
+    "en": "IRAS, Supplementary Retirement Scheme relief (iras.gov.sg home page, Individual Income Tax section, special tax schemes)"
    }
   },
   "iras_topup": {
-   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/central-provident-fund-%28cpf%29-cash-top-up-relief",
+   "url": "https://www.iras.gov.sg/",
    "label": {
-    "en": "IRAS, CPF cash top-up relief"
+    "en": "IRAS, CPF cash top-up relief (iras.gov.sg home page, Individual Income Tax section, tax reliefs)"
    }
   },
   "cpf_bhs_2026": {
-   "url": "https://www.cpf.gov.sg/member/infohub/news/news-releases/cpf-interest-rates-from-1-january-to-31-march-2026-and-basic-healthcare-sum-for-2026",
+   "url": "https://www.cpf.gov.sg/",
    "label": {
-    "en": "CPF Board, news release of 15 December 2025 (Basic Healthcare Sum 2026)"
+    "en": "CPF Board, news release of 15 December 2025 (Basic Healthcare Sum 2026, cpf.gov.sg home page, News releases)"
    }
   },
   "sdic": {
@@ -255,27 +255,27 @@
    }
   },
   "mas_msb_iii3a": {
-   "url": "https://www.mas.gov.sg/statistics/monthly-statistical-bulletin/iii-3a-commercial-banks-deposit-rate-of-sg-dollar-denominated-deposits-offered-to-non-bank-customers",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Monthly Statistical Bulletin table III.3A (bank deposit rates)"
+    "en": "MAS, Monthly Statistical Bulletin table III.3A (bank deposit rates, mas.gov.sg home page, Statistics section, Monthly Statistical Bulletin)"
    }
   },
   "mas_sora": {
-   "url": "https://www.mas.gov.sg/monetary-policy/sora",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Singapore Overnight Rate Average (SORA)"
+    "en": "MAS, Singapore Overnight Rate Average (SORA, mas.gov.sg home page, Monetary Policy section)"
    }
   },
   "mas_dir": {
-   "url": "https://eservices.mas.gov.sg/statistics/dir/DomesticInterestRates.aspx",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, Domestic Interest Rates (daily SORA)"
+    "en": "MAS, Domestic Interest Rates (daily SORA, mas.gov.sg home page, Statistics section, Domestic Interest Rates)"
    }
   },
   "iras_interest": {
-   "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/interest",
+   "url": "https://www.iras.gov.sg/",
    "label": {
-    "en": "IRAS, Interest: what is taxable"
+    "en": "IRAS, Interest: what is taxable (iras.gov.sg home page, Individual Income Tax section, what is taxable)"
    }
   },
   "mas_terms": {
@@ -285,9 +285,9 @@
    }
   },
   "mas_auction_conduct": {
-   "url": "https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/how-sgs-auctions-are-conducted",
+   "url": "https://www.mas.gov.sg/",
    "label": {
-    "en": "MAS, How SGS auctions are conducted"
+    "en": "MAS, How SGS auctions are conducted (mas.gov.sg home page, Bonds and Bills section)"
    }
   }
  }

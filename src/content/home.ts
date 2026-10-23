@@ -79,5 +79,5 @@ ${h.mini('ssb', { t: 'Interest of the latest Savings Bond on your amount', p: ['
     { q: 'Does this site tell me where to put my money?', a: 'No. It calculates what a sum earns under each product’s published rules and rates, and shows the conditions that change the answer, such as being able to redeem a Savings Bond in any month or not touching CPF money before 55. It sells nothing, links to no bank or broker and is not affiliated with MAS or the CPF Board.' },
     { q: 'How often is the data refreshed?', a: `Every business day at 10:30am Singapore time, a script reads the MAS statistics API and rebuilds the site when something changed: a new Savings Bond announcement on the first business day of the month, a T-bill result, a new SORA fixing. CPF rates change once a quarter and are updated when the CPF Board announces them. Each page shows the date of the last data.` },
   ] as FAQ[],
-  sources: ['mas_ssb', 'mas_tbill', 'mas_api_ssb', 'mas_api_bills', 'mas_msb_iii3a', 'mas_tax', 'cpf_pr_2026_09_22', 'cpf_interest', 'cpf_rs', 'sdic'],
+  sources: ['mas_ssb', 'mas_tbill', 'mas_api_ssb', 'mas_api_bills', 'mas_msb_iii3a', 'mas_tax', 'cpf_pr_2026_09_22', 'cpf_interest', 'cpf_rs', 'iras_interest', 'sdic'],
 };

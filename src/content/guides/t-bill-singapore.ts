@@ -3,8 +3,9 @@ import { KIT as K } from '../../lib/kit';
 
 const TB = K.P.tbill;
 const b6 = K.bill('6M'), b1 = K.bill('1Y');
-const HOW_URL = 'https://www.mas.gov.sg/bonds-and-bills/investing-in-singapore-government-securities/how-sgs-auctions-are-conducted';
-const CAL_URL = 'https://www.mas.gov.sg/bonds-and-bills/auctions-and-issuance-calendar';
+// MAS allows links to its home page only (mas.gov.sg/terms-of-use): the page is named in the link text.
+const HOW_URL = 'https://www.mas.gov.sg/';
+const CAL_URL = 'https://www.mas.gov.sg/';
 // Worked case of this page: S$25,000 of face value in each bill.
 const amt = 25000;
 const x6 = K.buy(amt, b6.cutoff, b6.days), x1 = K.buy(amt, b1.cutoff, b1.days);
@@ -38,12 +39,12 @@ export default defineGuide({
   ],
   body: (h) => `
 <h2>A discount, not a coupon</h2>
-<p>A T-bill pays its interest in one go, as a discount. At the auction, the yield determines a price below S$100; you pay that price and, on the maturity date, receive S$100 for every S$100 of face value. MAS describes the interest simply as the difference between the purchase price and the face value (${h.ext(HOW_URL, 'MAS, how SGS auctions are conducted')}). The government issues two bills for individuals: the 6-month bill, coded BS, auctioned every two weeks, and the 1-year bill, coded BY, auctioned once a quarter.</p>
+<p>A T-bill pays its interest in one go, as a discount. At the auction, the yield determines a price below S$100; you pay that price and, on the maturity date, receive S$100 for every S$100 of face value. MAS describes the interest simply as the difference between the purchase price and the face value (${h.ext(HOW_URL, 'MAS website, Bonds and Bills section: how SGS auctions are conducted')}). The government issues two bills for individuals: the 6-month bill, coded BS, auctioned every two weeks, and the 1-year bill, coded BY, auctioned once a quarter.</p>
 <p>The price follows a fixed formula: 100 × (1 − yield × days ÷ 365), rounded to three decimals. For ${b6.code}, ${K.pc(b6.cutoff)} over ${b6.days} days gives ${b6.price}. We checked the formula against all ${all.length} auction results in our data and it reproduces the published price in ${match} of them. The quoted yield is therefore a discount yield on face value. Measured on the cash you actually pay, the return is a little higher, ${K.pct(x6.yearly)} a year for the latest 6-month bill; the ${h.a('t-bill-yield', 'yield page')} explains the gap.</p>
 ${h.mini('tcalc', { t: 'Price per S$100 at the median yield of the last auction', p: ['yl'], d: { yl: b6.median, dy: b6.days } })}
 
 <h2>From announcement to issue: the auction timeline</h2>
-<p>Every T-bill auction runs on dates published in advance in the MAS issuance calendar (${h.ext(CAL_URL, 'MAS, auctions and issuance calendar')}). The bill is announced five business days before the auction, with the amount on offer. Individuals then apply through their bank, whose ATM and internet banking channels typically close one to two business days before auction day, at a time each bank sets. Primary dealers, the only bidders allowed to submit bids to MAS, must enter all bids by noon on auction day. Results come out about two hours later, and the bill is issued three business days after the auction.</p>
+<p>Every T-bill auction runs on dates published in advance in the MAS issuance calendar (${h.ext(CAL_URL, 'MAS website, Bonds and Bills section: auctions and issuance calendar')}). The bill is announced five business days before the auction, with the amount on offer. Individuals then apply through their bank, whose ATM and internet banking channels typically close one to two business days before auction day, at a time each bank sets. Primary dealers, the only bidders allowed to submit bids to MAS, must enter all bids by noon on auction day. Results come out about two hours later, and the bill is issued three business days after the auction.</p>
 <p>${n6 ? `The next 6-month auction on the calendar is ${n6.code} on ${K.day(n6.auction)}, for issue on ${K.day(n6.issue)}.` : 'The next 6-month auction will appear in the MAS calendar.'} ${n1 ? `The next 1-year auction listed is ${n1.code} on ${K.day(n1.auction)}.` : 'No 1-year auction is listed yet in the calendar we read.'} The ${h.a('next-t-bill-auction', 'next auction page')} adds an estimate of the cut-off, with its past error.</p>
 
 <h2>Competitive and non-competitive bids</h2>
