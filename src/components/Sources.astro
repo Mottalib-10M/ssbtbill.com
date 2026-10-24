@@ -10,6 +10,7 @@
  * Contrôlé par scripts/check-seo.py (échec si < 3 liens officiels sur le pilier).
  */
 import P from '../data/params-2026.json';
+import { lienAutorise, domaine } from '../lib/lien-source';
 interface Props { lang: string }
 const { lang } = Astro.props;
 
@@ -37,7 +38,7 @@ const sources: Src[] = Object.values((P as { sources?: Record<string, Src> }).so
     <p>{INTRO[lang] ?? INTRO.en} {P.retrieved_at}.</p>
     <ul>
       {sources.map((s) => (
-        <li><a href={s.url} rel="nofollow noopener" target="_blank">{s.label[lang] ?? s.label.en}</a></li>
+        <li>{lienAutorise(s.url) ? <a href={s.url} rel="nofollow noopener" target="_blank">{s.label[lang] ?? s.label.en}</a> : <cite class="not-italic">{s.label[lang] ?? s.label.en} ({domaine(s.url)})</cite>}</li>
       ))}
     </ul>
   </>

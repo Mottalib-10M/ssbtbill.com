@@ -1,0 +1,3 @@
+# Sources primaires propres au site (en plus de la liste de la trame)
+# SDIC : Singapore Deposit Insurance Corporation, assureur des dépôts créé par le Deposit Insurance and Policy Owners' Protection Schemes Act
+sdic.org.sg
