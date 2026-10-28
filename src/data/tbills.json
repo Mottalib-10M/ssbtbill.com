@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "Monetary Authority of Singapore, statistics API (bonds and bills)",
-  "read": "2026-10-24"
+  "read": "2026-10-28"
  },
  "auctions": [
   {
@@ -5195,6 +5195,28 @@
    "ncAllotted": 1460.875,
    "ncPct": 100,
    "cPct": 34.96
+  },
+  {
+   "code": "BS26122V",
+   "isin": "SGXZ26923052",
+   "term": "6M",
+   "announced": "2026-10-28",
+   "auction": "2026-11-04",
+   "issue": "2026-11-10",
+   "maturity": "2027-05-11",
+   "days": 182,
+   "done": false,
+   "cutoff": 0,
+   "price": 0,
+   "median": 0,
+   "average": 0,
+   "offered": 8500,
+   "allotted": null,
+   "bids": 0,
+   "cover": 0,
+   "ncAllotted": 0,
+   "ncPct": 0,
+   "cPct": 0
   }
  ]
 }

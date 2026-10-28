@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "Monetary Authority of Singapore, statistics API (bonds and bills)",
-  "read": "2026-10-21"
+  "read": "2026-10-28"
  },
  "issues": [
   {
@@ -5334,10 +5334,10 @@
    "maturity": "2036-11-01",
    "payMonths": "Nov,May",
    "size": 400,
-   "applied": 0,
-   "allotted": 0,
-   "done": false,
-   "cutoff": 0,
+   "applied": 310.7135,
+   "allotted": 293.1885,
+   "done": true,
+   "cutoff": 0.2,
    "randomRate": 0,
    "coupon": [
     1.67,
