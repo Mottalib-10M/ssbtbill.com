@@ -1,7 +1,7 @@
 {
  "meta": {
   "source": "Monetary Authority of Singapore, Domestic Interest Rates (SORA)",
-  "read": "2026-10-28"
+  "read": "2026-10-29"
  },
  "days": [
   {
@@ -1893,6 +1893,13 @@
    "c1m": 1.3367,
    "c3m": 1.2671,
    "c6m": 1.2171
+  },
+  {
+   "date": "2026-10-28",
+   "overnight": 1.0571,
+   "c1m": 1.3253,
+   "c3m": 1.2683,
+   "c6m": 1.2159
   }
  ]
 }
